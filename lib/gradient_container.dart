@@ -5,12 +5,19 @@ const startAlignment = Alignment.topLeft;
 const endAlignment = Alignment.bottomRight;
 
 class GradientContainer extends StatelessWidget {
-  const GradientContainer({super.key, required this.colors});
+  GradientContainer({super.key, required this.colors});
 
-  const GradientContainer.purple({super.key})
+  GradientContainer.purple({super.key})
       : colors = const [Colors.deepPurple, Colors.indigo];
 
   final List<Color> colors;
+
+  var activeImage = "assets/images/dice-1.png";
+
+  void roleDice() {
+    activeImage = "assets/images/dice-2.png";
+    print("Changed Image!");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +30,23 @@ class GradientContainer extends StatelessWidget {
         ),
       ),
       child: Center(
-          child: Image.asset(
-        "assets/images/dice-1.png",
-        width: 200,
+          child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            activeImage,
+            width: 200,
+          ),
+          TextButton(
+            onPressed: roleDice,
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.only(top: 20),
+              foregroundColor: Colors.white,
+              textStyle: const TextStyle(fontSize: 28),
+            ),
+            child: const Text("Click me!"),
+          )
+        ],
       )),
       // child: TextContainer("HELLOO!!")),
     );
